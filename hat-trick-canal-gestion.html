@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hat Trick for Canary Detect, The Leaky Finders</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1f2d;
+    --deep: #1a2f3f;
+    --gold: #c8973a;
+    --gold-light: #e8b85a;
+    --cream: #f8f4ee;
+    --warm-white: #fdfaf6;
+    --text: #2c2c2c;
+    --text-light: #5a5a5a;
+    --rule: #d4c9b8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.8;
+    font-size: 18px;
+  }
+
+  /* Header */
+  .masthead {
+    background: var(--navy);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .masthead-brand {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .masthead-sub {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--navy);
+    padding: 80px 40px 70px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(200,151,58,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-kicker {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: 'Source Serif 4', serif;
+    font-weight: 400;
+    margin-bottom: 24px;
+    padding: 6px 16px;
+    border: 1px solid rgba(200,151,58,0.4);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.15;
+    max-width: 780px;
+    margin: 0 auto 28px;
+  }
+
+  .hero h1 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-intro {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 36px auto 0;
+    opacity: 0.6;
+  }
+
+  /* Article body */
+  .article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 70px 40px 80px;
+  }
+
+  .article-wrap p {
+    margin-bottom: 1.5em;
+    color: var(--text);
+    font-size: 1.05rem;
+  }
+
+  .article-wrap p strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* Section headers */
+  .section-header {
+    margin: 56px 0 24px;
+    position: relative;
+    padding-top: 8px;
+  }
+
+  .section-header::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.25;
+  }
+
+  /* Callout box */
+  .callout {
+    background: var(--cream);
+    border-left: 4px solid var(--gold);
+    padding: 28px 32px;
+    margin: 40px 0;
+    position: relative;
+  }
+
+  .callout p {
+    margin-bottom: 0.8em;
+    font-size: 1rem;
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* The honest section */
+  .honest-box {
+    background: var(--navy);
+    padding: 36px 40px;
+    margin: 48px 0;
+    position: relative;
+  }
+
+  .honest-box::before {
+    content: 'AN HONEST ADMISSION';
+    display: block;
+    color: var(--gold);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  .honest-box p {
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 1em;
+  }
+
+  .honest-box p:last-child { margin-bottom: 0; }
+
+  .honest-box p strong {
+    color: var(--gold-light) !important;
+  }
+
+  /* Hat trick stats */
+  .hat-trick {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    margin: 40px 0;
+    border: 1px solid var(--rule);
+  }
+
+  .hat-trick-item {
+    background: var(--cream);
+    padding: 28px 20px;
+    text-align: center;
+  }
+
+  .hat-trick-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .hat-trick-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+
+  /* Rule divider */
+  .rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 48px 0;
+  }
+
+  /* Warning panel */
+  .warning-panel {
+    border: 1px solid var(--gold);
+    padding: 28px 32px;
+    margin: 40px 0;
+    position: relative;
+  }
+
+  .warning-panel::before {
+    content: '⚠ IMPORTANT';
+    display: block;
+    color: var(--gold);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    font-family: 'Source Serif 4', serif;
+    margin-bottom: 14px;
+  }
+
+  .warning-panel p {
+    margin-bottom: 0.8em;
+    font-size: 1rem;
+  }
+
+  .warning-panel p:last-child { margin-bottom: 0; }
+
+  /* LeakGuard section */
+  .leakguard-section {
+    background: var(--navy);
+    margin: 56px -40px 0;
+    padding: 56px 40px;
+  }
+
+  .leakguard-section .section-header::before { background: var(--gold); }
+  .leakguard-section .section-header h2 { color: #fff; }
+
+  .leakguard-section p {
+    color: rgba(255,255,255,0.75);
+  }
+
+  .leakguard-section p strong {
+    color: var(--gold-light) !important;
+  }
+
+  .leakguard-price {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    padding: 6px 20px;
+    margin: 8px 0 4px;
+  }
+
+  .leakguard-price-sub {
+    display: block;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--cream);
+    padding: 48px 40px;
+    text-align: center;
+    margin: 0 -40px;
+    border-top: 3px solid var(--gold);
+  }
+
+  .cta-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .cta-section p {
+    color: var(--text-light);
+    margin-bottom: 28px;
+    font-size: 0.95rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--navy);
+    color: #fff;
+    padding: 14px 32px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Source Serif 4', serif;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--deep); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--navy);
+    padding: 14px 32px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Source Serif 4', serif;
+    border: 1px solid var(--navy);
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { background: var(--navy); color: #fff; }
+
+  /* Footer */
+  .footer {
+    background: var(--navy);
+    padding: 24px 40px;
+    text-align: center;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .masthead { padding: 16px 20px; }
+    .hero { padding: 56px 24px 50px; }
+    .article-wrap { padding: 48px 24px 60px; }
+    .hat-trick { grid-template-columns: 1fr; }
+    .leakguard-section { margin: 56px -24px 0; padding: 40px 24px; }
+    .cta-section { margin: 0 -24px; padding: 40px 24px; }
+    .honest-box { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-brand">Canary Detect</div>
+  <div class="masthead-sub">The Leaky Finders &middot; Lanzarote</div>
+</header>
+
+<section class="hero">
+  <div class="hero-kicker">Announcement</div>
+  <h1>Hat Trick for<br><em>Canary Detect,</em><br>The Leaky Finders</h1>
+  <p class="hero-intro">We have just completed something we have been working towards for a long time. And if you own or manage a property in Lanzarote, this one is worth reading.</p>
+  <div class="hero-divider"></div>
+</section>
+
+<div class="article-wrap">
+
+  <p>This week, Canal Gestión Lanzarote formally recognised Canary Detect as an authorised installer. It is the final piece of a set we have been quietly assembling for the best part of two years, and it means something concrete for every property owner on this island.</p>
+
+  <div class="section-header">
+    <h2>Why this matters to you</h2>
+  </div>
+
+  <p>If a hidden leak has caused an unusually high water bill, you may be entitled to a reduction of up to <strong>50%</strong>. What most people don't know is that to qualify, the work must be carried out by a recognised authorised installer, and the claim must be submitted with that installer's official reference number. Without it, Canal Gestión cannot process a reduction on your behalf, regardless of how professional the repair was or how well the paperwork is presented.</p>
+
+  <p>Water in Lanzarote is billed on a two-month cycle. By the time a high bill arrives, a leak could have been running silently underground for sixty days. We regularly attend jobs where customers are sitting on bills of €1,000, €2,000, or more, with no visible signs whatsoever. No damp. No wet ground. Just a number on a page that doesn't make sense.</p>
+
+  <p>From this week, when Canary Detect carries out your repair, your documentation carries the reference. Your claim is supported in full.</p>
+
+  <hr class="rule">
+
+  <div class="section-header">
+    <h2>The journey</h2>
+  </div>
+
+  <p>Getting formally recognised by Canal Gestión was not a simple process. It was not a form, a phone call, or a quick email. It required our technical qualifications to be translated in full and formally homologated for recognition under Spanish regulatory standards. It required a review of our technical credentials at a national level. It required us to meet civil liability insurance requirements set out under Spain's official contractor certification framework, and to obtain approvals through multiple stages of that process.</p>
+
+  <p>It took months. There were moments we questioned whether the bureaucracy would ever end. But we believed it was worth doing properly, and we got there.</p>
+
+  <p>All of our Spanish-language reports, invoices, and guarantees will now carry our unique official installer reference number. That number is the key that unlocks the reduction claim process with Canal Gestión. Without it, a claim simply cannot be processed. With it, every customer we work with has everything they need.</p>
+
+  <hr class="rule">
+
+  <div class="section-header">
+    <h2>The hat trick</h2>
+  </div>
+
+  <p>Here is where it gets interesting.</p>
+
+  <p>Canal Gestión and Club Lanzarote are the only two water companies operating in Lanzarote. Every property on this island is supplied by one or the other.</p>
+
+  <p>We have held a formal agreement with <strong>Club Lanzarote</strong> for some time. Customers whose water is supplied by Club Lanzarote and who use Canary Detect are guaranteed a rebate on production of our report and invoice. That arrangement is in place, it is documented, and it works.</p>
+
+  <p>Earlier this year we were approved as a registered provider by a national home assistance network covering policyholders from <strong>21 major insurance companies</strong> operating across Lanzarote. That process was also rigorous. It also took time. But it means there is now a strong chance that if you make a claim on your home insurance for a leak, your insurer will send Canary Detect to you directly.</p>
+
+  <p>This week's Canal Gestión recognition completes the set.</p>
+
+  <div class="hat-trick">
+    <div class="hat-trick-item">
+      <span class="hat-trick-num">21</span>
+      <span class="hat-trick-label">Major insurers<br>in the network</span>
+    </div>
+    <div class="hat-trick-item">
+      <span class="hat-trick-num">2</span>
+      <span class="hat-trick-label">Water companies.<br>Both covered.</span>
+    </div>
+    <div class="hat-trick-item">
+      <span class="hat-trick-num">3</span>
+      <span class="hat-trick-label">Approvals.<br>Every customer covered.</span>
+    </div>
+  </div>
+
+  <p>Regardless of who supplies your water, regardless of whether you are insured or uninsured, Canary Detect is now the company that gives you the best possible chance of recovering money from a leak-related bill.</p>
+
+  <hr class="rule">
+
+  <div class="section-header">
+    <h2>If you get a high bill or suspect a leak, don't panic</h2>
+  </div>
+
+  <p>Our advice has always been the same and it has not changed: call your insurer first. Before you engage anyone. Before you call a plumber. Call your insurer, explain the situation, and find out what they will cover.</p>
+
+  <div class="warning-panel">
+    <p>If your insurer tells you to source your own contractor, confirm in writing that the company you are considering is a registered authorised installer with Canal Gestión. Without that confirmation, you risk losing your right to claim a reduction on your water bill entirely.</p>
+    <p>It is not enough for a company to tell you they can handle the claim. Get the reference. Get it in writing. Before any work begins.</p>
+  </div>
+
+  <hr class="rule">
+
+  <div class="section-header">
+    <h2>The risk of getting it wrong</h2>
+  </div>
+
+  <p>When a €2,000 water bill arrives, panic is a natural response. And panic leads to Facebook. Someone posts in the local group, a name gets recommended, a number gets called, and by the afternoon a man with a pressure gauge is at the door.</p>
+
+  <p>Maybe he finds the leak. Maybe he even fixes it. But unless he is a formally registered authorised installer with an official reference number recognised by Canal Gestión, none of it counts. The repair is done, the invoice is paid, and when you approach Canal Gestión to claim a reduction on your bill, there is nothing they can do for you. No reference, no claim. The money is gone.</p>
+
+  <div class="honest-box">
+    <p>And we will be honest with you. Until this week, that included us.</p>
+    <p>We could find your leak. We could fix it cleanly, repair the damage, and leave your property as if nothing had ever happened. Our reports are professional, our invoices are in Spanish, and our guarantees are thorough. But unless you were a Club Lanzarote customer, where our formal agreement guaranteed your rebate, we could not help you with that Canal Gestión bill. We did not have the reference. We could not make the claim possible.</p>
+    <p><strong>That changes today.</strong></p>
+  </div>
+
+  <div class="leakguard-section">
+    <div class="section-header">
+      <h2>The better outcome</h2>
+    </div>
+
+    <p>Here is the honest version of this story. Even if everything goes perfectly, you act quickly, you use the right company, Canal Gestión processes your claim without issue, a 50% reduction on a €2,500 bill still means you have lost €1,250. You have still had the stress, the uncertainty, and the weeks of waiting.</p>
+
+    <p>The better outcome is catching the leak in the first twenty-four hours, before it costs you anything at all.</p>
+
+    <p><strong>LeakGuard</strong> is our cloud-connected monitoring system. It attaches to your water meter, learns your property's normal usage pattern, and sends an alert to your phone the moment something looks wrong. No WiFi required. No mains power. It runs on its own cellular connection and never switches off.</p>
+
+    <p>LeakGuard caught its first live leak within twenty-four hours of being installed. No damp. No bill shock. No claim. Just a notification, a swift survey, and a targeted repair before the next billing cycle arrived.</p>
+
+    <div class="leakguard-price">€395</div>
+    <span class="leakguard-price-sub">Installation, setup and first 12 months monitoring included. Then just €60/year.</span>
+
+    <p>Find out more at <strong>leakguardlanzarote.com</strong></p>
+  </div>
+
+  <div class="cta-section">
+    <h3>Ready to talk?</h3>
+    <p>Book a survey, discuss a high bill, or find out more about LeakGuard.</p>
+    <div class="cta-buttons">
+      <a href="tel:+34711051071" class="btn-primary">+34 711 051 071</a>
+      <a href="mailto:info@canary-detect.com" class="btn-secondary">info@canary-detect.com</a>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  Canary Detect &mdash; The Leaky Finders &mdash; Lanzarote's Specialist Leak Detection Company &mdash; canary-detect.com
+</footer>
+
+</body>
+</html>
