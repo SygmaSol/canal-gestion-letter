@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .card {
+    position: relative;
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .card-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('leaky_finders_cartoon_1.png');
+    background-size: cover;
+    background-position: center 20%;
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(13,31,45,0.1) 0%,
+      rgba(13,31,45,0.15) 35%,
+      rgba(13,31,45,0.85) 62%,
+      rgba(13,31,45,0.97) 100%
+    );
+  }
+
+  .card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 52px 60px;
+  }
+
+  .card-kicker {
+    display: inline-block;
+    color: #c8973a;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid rgba(200,151,58,0.5);
+    padding: 6px 16px;
+    margin-bottom: 20px;
+  }
+
+  .card-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.12;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+  }
+
+  .card-headline em {
+    color: #c8973a;
+    font-style: italic;
+  }
+
+  .card-divider {
+    width: 48px;
+    height: 2px;
+    background: #c8973a;
+    margin-bottom: 24px;
+  }
+
+  .card-stats {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 32px;
+  }
+
+  .stat-item { text-align: left; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #c8973a;
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    display: block;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .card-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+
+  .card-brand span {
+    display: block;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .card-url {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.8rem;
+    color: #c8973a;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1140px) {
+    .card {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1/1;
+    }
+    .card-headline { font-size: clamp(1.4rem, 4vw, 3rem); }
+    .card-content { padding: clamp(24px, 5vw, 52px) clamp(24px, 6vw, 60px); }
+    .stat-num { font-size: clamp(1.4rem, 3vw, 2.2rem); }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-bg"></div>
+  <div class="card-overlay"></div>
+  <div class="card-content">
+    <div class="card-kicker">Official Announcement</div>
+    <h2 class="card-headline">
+      Canal Gestión Lanzarote<br>
+      formally recognises<br>
+      <em>Canary Detect</em><br>
+      as an authorised installer
+    </h2>
+    <div class="card-divider"></div>
+    <div class="card-stats">
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Approvals<br>completed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Water companies.<br>Both covered.</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">21</span>
+        <span class="stat-label">Major insurers<br>in the network</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-brand">
+        Canary Detect
+        <span>The Leaky Finders &middot; Lanzarote</span>
+      </div>
+      <div class="card-url">canary-detect.com</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
