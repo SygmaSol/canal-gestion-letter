@@ -31,7 +31,7 @@
     font-size: 18px;
   }
 
-  /* Header */
+  /* Masthead */
   .masthead {
     background: var(--navy);
     padding: 18px 40px;
@@ -39,175 +39,88 @@
     align-items: center;
     justify-content: space-between;
   }
+  .masthead-brand { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+  .masthead-sub { color: rgba(255,255,255,0.45); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
 
-  .masthead-brand {
-    color: var(--gold);
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .masthead-sub {
-    color: rgba(255,255,255,0.45);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  /* Hero */
-  .hero {
-    background: var(--navy);
-    padding: 80px 40px 70px;
-    text-align: center;
+  /* Hero image */
+  .hero-image {
     position: relative;
+    width: 100%;
+    max-height: 600px;
     overflow: hidden;
+    display: block;
   }
 
-  .hero::before {
-    content: '';
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .hero-image-overlay {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(200,151,58,0.12) 0%, transparent 70%);
-    pointer-events: none;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(13,31,45,0.2) 0%, rgba(13,31,45,0.75) 100%);
+  }
+
+  .hero-image-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 48px 56px;
   }
 
   .hero-kicker {
     display: inline-block;
     color: var(--gold);
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     font-family: 'Source Serif 4', serif;
-    font-weight: 400;
-    margin-bottom: 24px;
-    padding: 6px 16px;
-    border: 1px solid rgba(200,151,58,0.4);
+    margin-bottom: 16px;
+    padding: 5px 14px;
+    border: 1px solid rgba(200,151,58,0.5);
   }
 
-  .hero h1 {
+  .hero-image-text h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
     font-weight: 900;
     color: #fff;
     line-height: 1.15;
     max-width: 780px;
-    margin: 0 auto 28px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
   }
 
-  .hero h1 em {
-    color: var(--gold);
-    font-style: italic;
-  }
-
-  .hero-intro {
-    color: rgba(255,255,255,0.7);
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto;
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1.7;
-  }
-
-  .hero-divider {
-    width: 60px;
-    height: 2px;
-    background: var(--gold);
-    margin: 36px auto 0;
-    opacity: 0.6;
-  }
+  .hero-image-text h1 em { color: var(--gold); font-style: italic; }
 
   /* Article body */
   .article-wrap {
     max-width: 720px;
     margin: 0 auto;
-    padding: 70px 40px 80px;
+    padding: 64px 40px 80px;
   }
 
-  .article-wrap p {
-    margin-bottom: 1.5em;
-    color: var(--text);
-    font-size: 1.05rem;
+  .article-lead {
+    font-size: 1.15rem;
+    color: var(--text-light);
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .article-wrap p strong {
-    font-weight: 600;
-    color: var(--navy);
-  }
+  .article-wrap p { margin-bottom: 1.5em; font-size: 1.05rem; }
+  .article-wrap p strong { font-weight: 600; color: var(--navy); }
 
-  /* Section headers */
-  .section-header {
-    margin: 56px 0 24px;
-    position: relative;
-    padding-top: 8px;
-  }
+  .section-header { margin: 52px 0 22px; }
+  .section-header::before { content: ''; display: block; width: 36px; height: 3px; background: var(--gold); margin-bottom: 16px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; color: var(--navy); line-height: 1.25; }
 
-  .section-header::before {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 3px;
-    background: var(--gold);
-    margin-bottom: 18px;
-  }
-
-  .section-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1.25;
-  }
-
-  /* Callout box */
-  .callout {
-    background: var(--cream);
-    border-left: 4px solid var(--gold);
-    padding: 28px 32px;
-    margin: 40px 0;
-    position: relative;
-  }
-
-  .callout p {
-    margin-bottom: 0.8em;
-    font-size: 1rem;
-  }
-
-  .callout p:last-child { margin-bottom: 0; }
-
-  /* The honest section */
-  .honest-box {
-    background: var(--navy);
-    padding: 36px 40px;
-    margin: 48px 0;
-    position: relative;
-  }
-
-  .honest-box::before {
-    content: 'AN HONEST ADMISSION';
-    display: block;
-    color: var(--gold);
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    font-family: 'Source Serif 4', serif;
-  }
-
-  .honest-box p {
-    color: rgba(255,255,255,0.85);
-    margin-bottom: 1em;
-  }
-
-  .honest-box p:last-child { margin-bottom: 0; }
-
-  .honest-box p strong {
-    color: var(--gold-light) !important;
-  }
-
-  /* Hat trick stats */
   .hat-trick {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -216,172 +129,53 @@
     margin: 40px 0;
     border: 1px solid var(--rule);
   }
+  .hat-trick-item { background: var(--cream); padding: 28px 20px; text-align: center; }
+  .hat-trick-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--gold); line-height: 1; display: block; margin-bottom: 8px; }
+  .hat-trick-label { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); line-height: 1.4; }
 
-  .hat-trick-item {
-    background: var(--cream);
-    padding: 28px 20px;
-    text-align: center;
-  }
+  .callout { background: var(--cream); border-left: 4px solid var(--gold); padding: 28px 32px; margin: 40px 0; }
+  .callout p { margin-bottom: 0.8em; font-size: 1rem; }
+  .callout p:last-child { margin-bottom: 0; }
 
-  .hat-trick-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    font-weight: 900;
-    color: var(--gold);
-    line-height: 1;
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  .hat-trick-label {
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-light);
-    line-height: 1.4;
-  }
-
-  /* Rule divider */
-  .rule {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 48px 0;
-  }
-
-  /* Warning panel */
-  .warning-panel {
-    border: 1px solid var(--gold);
-    padding: 28px 32px;
-    margin: 40px 0;
-    position: relative;
-  }
-
-  .warning-panel::before {
-    content: '⚠ IMPORTANT';
-    display: block;
-    color: var(--gold);
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    font-family: 'Source Serif 4', serif;
-    margin-bottom: 14px;
-  }
-
-  .warning-panel p {
-    margin-bottom: 0.8em;
-    font-size: 1rem;
-  }
-
+  .warning-panel { border: 1px solid var(--gold); padding: 28px 32px; margin: 40px 0; }
+  .warning-panel::before { content: '⚠ IMPORTANT'; display: block; color: var(--gold); font-size: 0.68rem; letter-spacing: 0.2em; font-family: 'Source Serif 4', serif; margin-bottom: 14px; }
+  .warning-panel p { margin-bottom: 0.8em; font-size: 1rem; }
   .warning-panel p:last-child { margin-bottom: 0; }
 
-  /* LeakGuard section */
-  .leakguard-section {
-    background: var(--navy);
-    margin: 56px -40px 0;
-    padding: 56px 40px;
-  }
+  .honest-box { background: var(--navy); padding: 36px 40px; margin: 48px 0; }
+  .honest-box::before { content: 'AN HONEST ADMISSION'; display: block; color: var(--gold); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; font-family: 'Source Serif 4', serif; }
+  .honest-box p { color: rgba(255,255,255,0.85); margin-bottom: 1em; }
+  .honest-box p:last-child { margin-bottom: 0; }
+  .honest-box p strong { color: var(--gold-light) !important; }
 
+  .rule { border: none; border-top: 1px solid var(--rule); margin: 48px 0; }
+
+  /* LeakGuard */
+  .leakguard-section { background: var(--navy); margin: 56px -40px 0; padding: 56px 40px; }
   .leakguard-section .section-header::before { background: var(--gold); }
   .leakguard-section .section-header h2 { color: #fff; }
-
-  .leakguard-section p {
-    color: rgba(255,255,255,0.75);
-  }
-
-  .leakguard-section p strong {
-    color: var(--gold-light) !important;
-  }
-
-  .leakguard-price {
-    display: inline-block;
-    background: var(--gold);
-    color: var(--navy);
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 900;
-    padding: 6px 20px;
-    margin: 8px 0 4px;
-  }
-
-  .leakguard-price-sub {
-    display: block;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.85rem;
-    margin-bottom: 24px;
-  }
+  .leakguard-section p { color: rgba(255,255,255,0.75); }
+  .leakguard-section p strong { color: var(--gold-light) !important; }
+  .leakguard-price { display: inline-block; background: var(--gold); color: var(--navy); font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; padding: 6px 20px; margin: 8px 0 4px; }
+  .leakguard-price-sub { display: block; color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 24px; }
 
   /* CTA */
-  .cta-section {
-    background: var(--cream);
-    padding: 48px 40px;
-    text-align: center;
-    margin: 0 -40px;
-    border-top: 3px solid var(--gold);
-  }
-
-  .cta-section h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: var(--navy);
-    margin-bottom: 8px;
-  }
-
-  .cta-section p {
-    color: var(--text-light);
-    margin-bottom: 28px;
-    font-size: 0.95rem;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    background: var(--navy);
-    color: #fff;
-    padding: 14px 32px;
-    text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-family: 'Source Serif 4', serif;
-    transition: background 0.2s;
-  }
-
+  .cta-section { background: var(--cream); padding: 48px 40px; text-align: center; margin: 0 -40px; border-top: 3px solid var(--gold); }
+  .cta-section h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--navy); margin-bottom: 8px; }
+  .cta-section p { color: var(--text-light); margin-bottom: 28px; font-size: 0.95rem; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--navy); color: #fff; padding: 14px 32px; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Source Serif 4', serif; transition: background 0.2s; }
   .btn-primary:hover { background: var(--deep); }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--navy);
-    padding: 14px 32px;
-    text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-family: 'Source Serif 4', serif;
-    border: 1px solid var(--navy);
-    transition: all 0.2s;
-  }
-
+  .btn-secondary { background: transparent; color: var(--navy); padding: 14px 32px; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Source Serif 4', serif; border: 1px solid var(--navy); transition: all 0.2s; }
   .btn-secondary:hover { background: var(--navy); color: #fff; }
 
-  /* Footer */
-  .footer {
-    background: var(--navy);
-    padding: 24px 40px;
-    text-align: center;
-    color: rgba(255,255,255,0.35);
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
+  .footer { background: var(--navy); padding: 24px 40px; text-align: center; color: rgba(255,255,255,0.35); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
 
   @media (max-width: 600px) {
     .masthead { padding: 16px 20px; }
-    .hero { padding: 56px 24px 50px; }
-    .article-wrap { padding: 48px 24px 60px; }
+    .hero-image { max-height: 400px; }
+    .hero-image-text { padding: 28px 24px; }
+    .article-wrap { padding: 40px 24px 60px; }
     .hat-trick { grid-template-columns: 1fr; }
     .leakguard-section { margin: 56px -24px 0; padding: 40px 24px; }
     .cta-section { margin: 0 -24px; padding: 40px 24px; }
@@ -396,20 +190,22 @@
   <div class="masthead-sub">The Leaky Finders &middot; Lanzarote</div>
 </header>
 
-<section class="hero">
-  <div class="hero-kicker">Announcement</div>
-  <h1>Hat Trick for<br><em>Canary Detect,</em><br>The Leaky Finders</h1>
-  <p class="hero-intro">We have just completed something we have been working towards for a long time. And if you own or manage a property in Lanzarote, this one is worth reading.</p>
-  <div class="hero-divider"></div>
-</section>
+<div class="hero-image">
+  <img src="leaky_finders_cartoon_1.png" alt="By Order of the Leaky Finders">
+  <div class="hero-image-overlay"></div>
+  <div class="hero-image-text">
+    <div class="hero-kicker">Official Announcement</div>
+    <h1>Canal Gestión Lanzarote<br>formally recognises<br><em>Canary Detect</em><br>as an authorised installer</h1>
+  </div>
+</div>
 
 <div class="article-wrap">
 
+  <p class="article-lead">We have just completed something we have been working towards for a long time. And if you own or manage a property in Lanzarote, this one is worth reading.</p>
+
   <p>This week, Canal Gestión Lanzarote formally recognised Canary Detect as an authorised installer. It is the final piece of a set we have been quietly assembling for the best part of two years, and it means something concrete for every property owner on this island.</p>
 
-  <div class="section-header">
-    <h2>Why this matters to you</h2>
-  </div>
+  <div class="section-header"><h2>Why this matters to you</h2></div>
 
   <p>If a hidden leak has caused an unusually high water bill, you may be entitled to a reduction of up to <strong>50%</strong>. What most people don't know is that to qualify, the work must be carried out by a recognised authorised installer, and the claim must be submitted with that installer's official reference number. Without it, Canal Gestión cannot process a reduction on your behalf, regardless of how professional the repair was or how well the paperwork is presented.</p>
 
@@ -419,9 +215,7 @@
 
   <hr class="rule">
 
-  <div class="section-header">
-    <h2>The journey</h2>
-  </div>
+  <div class="section-header"><h2>The journey</h2></div>
 
   <p>Getting formally recognised by Canal Gestión was not a simple process. It was not a form, a phone call, or a quick email. It required our technical qualifications to be translated in full and formally homologated for recognition under Spanish regulatory standards. It required a review of our technical credentials at a national level. It required us to meet civil liability insurance requirements set out under Spain's official contractor certification framework, and to obtain approvals through multiple stages of that process.</p>
 
@@ -431,9 +225,7 @@
 
   <hr class="rule">
 
-  <div class="section-header">
-    <h2>The hat trick</h2>
-  </div>
+  <div class="section-header"><h2>The hat trick</h2></div>
 
   <p>Here is where it gets interesting.</p>
 
@@ -464,9 +256,7 @@
 
   <hr class="rule">
 
-  <div class="section-header">
-    <h2>If you get a high bill or suspect a leak, don't panic</h2>
-  </div>
+  <div class="section-header"><h2>If you get a high bill or suspect a leak, don't panic</h2></div>
 
   <p>Our advice has always been the same and it has not changed: call your insurer first. Before you engage anyone. Before you call a plumber. Call your insurer, explain the situation, and find out what they will cover.</p>
 
@@ -477,9 +267,7 @@
 
   <hr class="rule">
 
-  <div class="section-header">
-    <h2>The risk of getting it wrong</h2>
-  </div>
+  <div class="section-header"><h2>The risk of getting it wrong</h2></div>
 
   <p>When a €2,000 water bill arrives, panic is a natural response. And panic leads to Facebook. Someone posts in the local group, a name gets recommended, a number gets called, and by the afternoon a man with a pressure gauge is at the door.</p>
 
@@ -492,21 +280,13 @@
   </div>
 
   <div class="leakguard-section">
-    <div class="section-header">
-      <h2>The better outcome</h2>
-    </div>
-
+    <div class="section-header"><h2>The better outcome</h2></div>
     <p>Here is the honest version of this story. Even if everything goes perfectly, you act quickly, you use the right company, Canal Gestión processes your claim without issue, a 50% reduction on a €2,500 bill still means you have lost €1,250. You have still had the stress, the uncertainty, and the weeks of waiting.</p>
-
     <p>The better outcome is catching the leak in the first twenty-four hours, before it costs you anything at all.</p>
-
     <p><strong>LeakGuard</strong> is our cloud-connected monitoring system. It attaches to your water meter, learns your property's normal usage pattern, and sends an alert to your phone the moment something looks wrong. No WiFi required. No mains power. It runs on its own cellular connection and never switches off.</p>
-
     <p>LeakGuard caught its first live leak within twenty-four hours of being installed. No damp. No bill shock. No claim. Just a notification, a swift survey, and a targeted repair before the next billing cycle arrived.</p>
-
     <div class="leakguard-price">€395</div>
     <span class="leakguard-price-sub">Installation, setup and first 12 months monitoring included. Then just €60/year.</span>
-
     <p>Find out more at <strong>leakguardlanzarote.com</strong></p>
   </div>
 
