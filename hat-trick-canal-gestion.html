@@ -42,66 +42,54 @@
   .masthead-brand { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
   .masthead-sub { color: rgba(255,255,255,0.45); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
 
-  /* Hero image */
-  .hero-image {
-    position: relative;
+  /* Top image (social card) */
+  .top-image {
     width: 100%;
-    max-height: 600px;
-    overflow: hidden;
+    display: block;
+    line-height: 0;
+  }
+
+  .top-image img {
+    width: 100%;
+    height: auto;
     display: block;
   }
 
-  .hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
+  /* Article header */
+  .article-header {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 40px 0;
   }
 
-  .hero-image-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(13,31,45,0.2) 0%, rgba(13,31,45,0.75) 100%);
-  }
-
-  .hero-image-text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 48px 56px;
-  }
-
-  .hero-kicker {
+  .article-kicker {
     display: inline-block;
     color: var(--gold);
     font-size: 0.72rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     font-family: 'Source Serif 4', serif;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     padding: 5px 14px;
     border: 1px solid rgba(200,151,58,0.5);
   }
 
-  .hero-image-text h1 {
+  .article-header h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.8rem, 4vw, 3.2rem);
     font-weight: 900;
-    color: #fff;
+    color: var(--navy);
     line-height: 1.15;
-    max-width: 780px;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    margin-bottom: 32px;
   }
 
-  .hero-image-text h1 em { color: var(--gold); font-style: italic; }
+  .article-header h1 em { color: var(--gold); font-style: italic; }
 
   /* Article body */
   .article-wrap {
     max-width: 720px;
     margin: 0 auto;
-    padding: 64px 40px 80px;
+    padding: 48px 40px 80px;
   }
 
   .article-lead {
@@ -120,6 +108,37 @@
   .section-header { margin: 52px 0 22px; }
   .section-header::before { content: ''; display: block; width: 36px; height: 3px; background: var(--gold); margin-bottom: 16px; }
   .section-header h2 { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; color: var(--navy); line-height: 1.25; }
+
+  /* Article images */
+  .article-img {
+    margin: 40px 0;
+    line-height: 0;
+  }
+  .article-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .article-img-caption {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    padding: 10px 0 0;
+    font-style: italic;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* Full-bleed image (breaks column) */
+  .article-img-wide {
+    margin: 48px -40px;
+    line-height: 0;
+  }
+  .article-img-wide img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 
   .hat-trick {
     display: grid;
@@ -158,6 +177,19 @@
   .leakguard-section p strong { color: var(--gold-light) !important; }
   .leakguard-price { display: inline-block; background: var(--gold); color: var(--navy); font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; padding: 6px 20px; margin: 8px 0 4px; }
   .leakguard-price-sub { display: block; color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-bottom: 24px; }
+  .leakguard-section .article-img { margin: 32px -40px; }
+  .leakguard-section .article-img img { width: calc(100% + 80px); max-width: none; margin: 0 -40px; }
+
+  /* Closer image */
+  .closer-image {
+    width: 100%;
+    line-height: 0;
+  }
+  .closer-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 
   /* CTA */
   .cta-section { background: var(--cream); padding: 48px 40px; text-align: center; margin: 0 -40px; border-top: 3px solid var(--gold); }
@@ -173,11 +205,13 @@
 
   @media (max-width: 600px) {
     .masthead { padding: 16px 20px; }
-    .hero-image { max-height: 400px; }
-    .hero-image-text { padding: 28px 24px; }
-    .article-wrap { padding: 40px 24px 60px; }
+    .article-header { padding: 32px 24px 0; }
+    .article-wrap { padding: 32px 24px 60px; }
+    .article-img-wide { margin: 40px -24px; }
     .hat-trick { grid-template-columns: 1fr; }
     .leakguard-section { margin: 56px -24px 0; padding: 40px 24px; }
+    .leakguard-section .article-img { margin: 32px -24px; }
+    .leakguard-section .article-img img { width: calc(100% + 48px); margin: 0 -24px; }
     .cta-section { margin: 0 -24px; padding: 40px 24px; }
     .honest-box { padding: 28px 24px; }
   }
@@ -190,18 +224,22 @@
   <div class="masthead-sub">The Leaky Finders &middot; Lanzarote</div>
 </header>
 
-<div class="hero-image">
-  <img src="leaky_finders_cartoon_1.png" alt="By Order of the Leaky Finders">
-  <div class="hero-image-overlay"></div>
-  <div class="hero-image-text">
-    <div class="hero-kicker">Official Announcement</div>
-    <h1>Canal Gestión Lanzarote<br>formally recognises<br><em>Canary Detect</em><br>as an authorised installer</h1>
-  </div>
+<div class="top-image">
+  <img src="hat-trick-social-card.png" alt="Canal Gestión Lanzarote formally recognises Canary Detect as an authorised installer — 3 approvals, 2 water companies, 21 major insurers">
+</div>
+
+<div class="article-header">
+  <div class="article-kicker">Official Announcement</div>
+  <h1>Canal Gestión Lanzarote formally recognises <em>Canary Detect</em> as an authorised installer</h1>
 </div>
 
 <div class="article-wrap">
 
   <p class="article-lead">We have just completed something we have been working towards for a long time. And if you own or manage a property in Lanzarote, this one is worth reading.</p>
+
+  <div class="article-img">
+    <img src="leaky_finders_photorealistic_2.png" alt="WANTED — For crimes against your water bill. Last seen by The Leaky Finders.">
+  </div>
 
   <p>This week, Canal Gestión Lanzarote formally recognised Canary Detect as an authorised installer. It is the final piece of a set we have been quietly assembling for the best part of two years, and it means something concrete for every property owner on this island.</p>
 
@@ -212,6 +250,10 @@
   <p>Water in Lanzarote is billed on a two-month cycle. By the time a high bill arrives, a leak could have been running silently underground for sixty days. We regularly attend jobs where customers are sitting on bills of €1,000, €2,000, or more, with no visible signs whatsoever. No damp. No wet ground. Just a number on a page that doesn't make sense.</p>
 
   <p>From this week, when Canary Detect carries out your repair, your documentation carries the reference. Your claim is supported in full.</p>
+
+  <div class="article-img">
+    <img src="canary5_sofa_flooding.png" alt="Canary Detect technician arrives approved and ready — the only company that gives you every route to a reduction">
+  </div>
 
   <hr class="rule">
 
@@ -254,6 +296,10 @@
 
   <p>Regardless of who supplies your water, regardless of whether you are insured or uninsured, Canary Detect is now the company that gives you the best possible chance of recovering money from a leak-related bill.</p>
 
+  <div class="article-img-wide">
+    <img src="canary_detect_difference.png" alt="The Canary Detect Difference — Lanzarote's specialist leak detection team">
+  </div>
+
   <hr class="rule">
 
   <div class="section-header"><h2>If you get a high bill or suspect a leak, don't panic</h2></div>
@@ -268,6 +314,10 @@
   <hr class="rule">
 
   <div class="section-header"><h2>The risk of getting it wrong</h2></div>
+
+  <div class="article-img">
+    <img src="nowhere-to-run-drip-cartoon.png" alt="Nowhere to run — the Leaky Finders track down leaks wherever they hide">
+  </div>
 
   <p>When a €2,000 water bill arrives, panic is a natural response. And panic leads to Facebook. Someone posts in the local group, a name gets recommended, a number gets called, and by the afternoon a man with a pressure gauge is at the door.</p>
 
@@ -284,6 +334,9 @@
     <p>Here is the honest version of this story. Even if everything goes perfectly, you act quickly, you use the right company, Canal Gestión processes your claim without issue, a 50% reduction on a €2,500 bill still means you have lost €1,250. You have still had the stress, the uncertainty, and the weeks of waiting.</p>
     <p>The better outcome is catching the leak in the first twenty-four hours, before it costs you anything at all.</p>
     <p><strong>LeakGuard</strong> is our cloud-connected monitoring system. It attaches to your water meter, learns your property's normal usage pattern, and sends an alert to your phone the moment something looks wrong. No WiFi required. No mains power. It runs on its own cellular connection and never switches off.</p>
+    <div class="article-img">
+      <img src="leakguard-slide.jpg" alt="LeakGuard — Catch Leaks in 24 Hours, Not 6 Weeks. Cloud-connected water monitoring by Canary Detect.">
+    </div>
     <p>LeakGuard caught its first live leak within twenty-four hours of being installed. No damp. No bill shock. No claim. Just a notification, a swift survey, and a targeted repair before the next billing cycle arrived.</p>
     <div class="leakguard-price">€395</div>
     <span class="leakguard-price-sub">Installation, setup and first 12 months monitoring included. Then just €60/year.</span>
@@ -299,6 +352,10 @@
     </div>
   </div>
 
+</div>
+
+<div class="closer-image">
+  <img src="Picture21.png" alt="Job done. Canary Detect — The Leaky Finders, Lanzarote">
 </div>
 
 <footer class="footer">
